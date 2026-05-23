@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 12%;
+
+    --primary: 220 65% 18%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 175 55% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 46%;
+
+    --accent: 175 45% 92%;
+    --accent-foreground: 175 55% 25%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 220 65% 18%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 30% 12%;
+    --sidebar-foreground: 220 10% 90%;
+    --sidebar-primary: 175 55% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 25% 18%;
+    --sidebar-accent-foreground: 220 10% 90%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 175 55% 45%;
+
+    --success: 152 60% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 210 80% 52%;
+    --info-foreground: 0 0% 100%;
+
+    --chat-user: 175 45% 92%;
+    --chat-user-foreground: 175 55% 20%;
+    --chat-ai: 260 45% 94%;
+    --chat-ai-foreground: 260 40% 25%;
+    --chat-mentor: 220 60% 94%;
+    --chat-mentor-foreground: 220 60% 20%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(220 65% 14%), hsl(220 50% 24%), hsl(175 40% 30%));
+    --gradient-accent: linear-gradient(135deg, hsl(175 55% 40%), hsl(175 65% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 65% 14%), hsl(220 50% 22%), hsl(175 40% 28%));
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.08), hsl(0 0% 100% / 0.02));
+
+    --shadow-sm: 0 1px 2px hsl(220 30% 12% / 0.05);
+    --shadow-md: 0 4px 16px hsl(220 30% 12% / 0.08), 0 1px 3px hsl(220 30% 12% / 0.04);
+    --shadow-lg: 0 12px 40px hsl(220 30% 12% / 0.12), 0 4px 12px hsl(220 30% 12% / 0.06);
+    --shadow-glow: 0 0 24px hsl(175 55% 40% / 0.2);
+    --shadow-premium: 0 8px 32px hsl(220 30% 12% / 0.1), 0 2px 8px hsl(175 55% 40% / 0.06);
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 210 40% 95%;
+    --card: 220 25% 12%;
+    --card-foreground: 210 40% 95%;
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 175 55% 45%;
+    --primary-foreground: 220 30% 8%;
+    --secondary: 220 30% 20%;
+    --secondary-foreground: 210 40% 95%;
+    --muted: 220 20% 16%;
+    --muted-foreground: 220 10% 55%;
+    --accent: 175 30% 18%;
+    --accent-foreground: 175 55% 65%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 175 55% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    direction: rtl;
+  }
+
+  body {
+    @apply bg-background text-foreground font-heebo antialiased;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-md);
+  }
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  .shadow-premium {
+    box-shadow: var(--shadow-premium);
+  }
+  .glass-panel {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+}
+
+@layer base {
+  button, [role="button"], a, .cursor-pointer {
+    @apply transition-transform duration-150 active:scale-95;
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% { box-shadow: 0 0 6px rgba(184,134,11,0.15); }
+  50% { box-shadow: 0 0 14px rgba(184,134,11,0.35); }
+}

@@ -1,0 +1,1 @@
+ALTER TABLE public.client_details ADD COLUMN product_ids jsonb DEFAULT '[]'::jsonb;

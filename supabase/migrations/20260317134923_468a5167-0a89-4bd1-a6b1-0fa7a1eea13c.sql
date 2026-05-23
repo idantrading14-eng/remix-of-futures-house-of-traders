@@ -1,0 +1,1 @@
+ALTER TABLE public.courses ADD COLUMN external_id text UNIQUE DEFAULT null;
