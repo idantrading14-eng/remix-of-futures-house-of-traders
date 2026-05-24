@@ -14,178 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      activity_log: {
-        Row: {
-          action: string
-          client_id: string
-          created_at: string
-          description: string
-          id: string
-        }
-        Insert: {
-          action: string
-          client_id: string
-          created_at?: string
-          description: string
-          id?: string
-        }
-        Update: {
-          action?: string
-          client_id?: string
-          created_at?: string
-          description?: string
-          id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "activity_log_client_id_fkey"
-            columns: ["client_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      ai_suggestions: {
-        Row: {
-          created_at: string | null
-          id: string
-          question: string
-          status: string
-          student_id: string
-          student_name: string
-          suggested_answer: string
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          question: string
-          status?: string
-          student_id: string
-          student_name: string
-          suggested_answer: string
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          question?: string
-          status?: string
-          student_id?: string
-          student_name?: string
-          suggested_answer?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "ai_suggestions_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      client_details: {
-        Row: {
-          amount_paid: number | null
-          created_at: string
-          email: string | null
-          id: string
-          notes: string | null
-          phone: string | null
-          plan_id: string | null
-          product_ids: Json | null
-          sessions_total: number | null
-          status: string
-          student_id: string
-          updated_at: string
-        }
-        Insert: {
-          amount_paid?: number | null
-          created_at?: string
-          email?: string | null
-          id?: string
-          notes?: string | null
-          phone?: string | null
-          plan_id?: string | null
-          product_ids?: Json | null
-          sessions_total?: number | null
-          status?: string
-          student_id: string
-          updated_at?: string
-        }
-        Update: {
-          amount_paid?: number | null
-          created_at?: string
-          email?: string | null
-          id?: string
-          notes?: string | null
-          phone?: string | null
-          plan_id?: string | null
-          product_ids?: Json | null
-          sessions_total?: number | null
-          status?: string
-          student_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "client_details_plan_id_fkey"
-            columns: ["plan_id"]
-            isOneToOne: false
-            referencedRelation: "plans"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "client_details_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: true
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      client_notes: {
-        Row: {
-          content: string
-          created_at: string
-          id: string
-          mentor_id: string
-          student_id: string
-          updated_at: string
-        }
-        Insert: {
-          content: string
-          created_at?: string
-          id?: string
-          mentor_id: string
-          student_id: string
-          updated_at?: string
-        }
-        Update: {
-          content?: string
-          created_at?: string
-          id?: string
-          mentor_id?: string
-          student_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "client_notes_mentor_id_fkey"
-            columns: ["mentor_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "client_notes_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       courses: {
         Row: {
           certificate_enabled: boolean
@@ -193,7 +21,6 @@ export type Database = {
           created_at: string
           description: string | null
           enrollment_type: string
-          external_id: string | null
           html_content: string | null
           id: string
           pdf_url: string | null
@@ -210,7 +37,6 @@ export type Database = {
           created_at?: string
           description?: string | null
           enrollment_type?: string
-          external_id?: string | null
           html_content?: string | null
           id?: string
           pdf_url?: string | null
@@ -227,7 +53,6 @@ export type Database = {
           created_at?: string
           description?: string | null
           enrollment_type?: string
-          external_id?: string | null
           html_content?: string | null
           id?: string
           pdf_url?: string | null
@@ -237,24 +62,6 @@ export type Database = {
           type?: string
           updated_at?: string
           visibility?: string
-        }
-        Relationships: []
-      }
-      divisions: {
-        Row: {
-          created_at: string
-          id: string
-          name: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          name: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          name?: string
         }
         Relationships: []
       }
@@ -430,54 +237,6 @@ export type Database = {
           },
         ]
       }
-      messages: {
-        Row: {
-          attachment_url: string | null
-          content: string
-          created_at: string | null
-          id: string
-          message_type: string
-          sender_id: string | null
-          sender_role: string
-          student_id: string
-        }
-        Insert: {
-          attachment_url?: string | null
-          content: string
-          created_at?: string | null
-          id?: string
-          message_type?: string
-          sender_id?: string | null
-          sender_role: string
-          student_id: string
-        }
-        Update: {
-          attachment_url?: string | null
-          content?: string
-          created_at?: string | null
-          id?: string
-          message_type?: string
-          sender_id?: string | null
-          sender_role?: string
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "messages_sender_id_fkey"
-            columns: ["sender_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "messages_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       modules: {
         Row: {
           access_level: string
@@ -534,154 +293,45 @@ export type Database = {
           },
         ]
       }
-      onboarding_answers: {
-        Row: {
-          completed_at: string
-          email: string | null
-          id: string
-          time_vs_money: string
-          user_id: string
-          user_name: string
-        }
-        Insert: {
-          completed_at?: string
-          email?: string | null
-          id?: string
-          time_vs_money: string
-          user_id: string
-          user_name: string
-        }
-        Update: {
-          completed_at?: string
-          email?: string | null
-          id?: string
-          time_vs_money?: string
-          user_id?: string
-          user_name?: string
-        }
-        Relationships: []
-      }
-      payments: {
-        Row: {
-          amount: number
-          client_id: string
-          created_at: string
-          date: string
-          id: string
-          method: string | null
-          status: string
-        }
-        Insert: {
-          amount: number
-          client_id: string
-          created_at?: string
-          date?: string
-          id?: string
-          method?: string | null
-          status?: string
-        }
-        Update: {
-          amount?: number
-          client_id?: string
-          created_at?: string
-          date?: string
-          id?: string
-          method?: string | null
-          status?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "payments_client_id_fkey"
-            columns: ["client_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      plans: {
-        Row: {
-          color: string
-          created_at: string
-          id: string
-          name: string
-          stage_names: Json
-          total_stages: number
-        }
-        Insert: {
-          color?: string
-          created_at?: string
-          id?: string
-          name: string
-          stage_names?: Json
-          total_stages?: number
-        }
-        Update: {
-          color?: string
-          created_at?: string
-          id?: string
-          name?: string
-          stage_names?: Json
-          total_stages?: number
-        }
-        Relationships: []
-      }
       profiles: {
         Row: {
           approved: boolean | null
           created_at: string | null
           display_name: string
-          division_id: string | null
           id: string
-          onboarding_completed: boolean
           role: string
         }
         Insert: {
           approved?: boolean | null
           created_at?: string | null
           display_name: string
-          division_id?: string | null
           id: string
-          onboarding_completed?: boolean
           role?: string
         }
         Update: {
           approved?: boolean | null
           created_at?: string | null
           display_name?: string
-          division_id?: string | null
           id?: string
-          onboarding_completed?: boolean
           role?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "profiles_division_id_fkey"
-            columns: ["division_id"]
-            isOneToOne: false
-            referencedRelation: "divisions"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       student_access: {
         Row: {
           has_courses_access: boolean
-          has_mentorchat_access: boolean
           id: string
           updated_at: string
           user_id: string
         }
         Insert: {
           has_courses_access?: boolean
-          has_mentorchat_access?: boolean
           id?: string
           updated_at?: string
           user_id: string
         }
         Update: {
           has_courses_access?: boolean
-          has_mentorchat_access?: boolean
           id?: string
           updated_at?: string
           user_id?: string
@@ -719,59 +369,6 @@ export type Database = {
             columns: ["lesson_id"]
             isOneToOne: false
             referencedRelation: "lessons"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      student_reminders: {
-        Row: {
-          id: string
-          reminder_type: string
-          sent_at: string
-          sent_by: string
-          student_id: string
-        }
-        Insert: {
-          id?: string
-          reminder_type?: string
-          sent_at?: string
-          sent_by: string
-          student_id: string
-        }
-        Update: {
-          id?: string
-          reminder_type?: string
-          sent_at?: string
-          sent_by?: string
-          student_id?: string
-        }
-        Relationships: []
-      }
-      student_stages: {
-        Row: {
-          id: string
-          stage: number
-          student_id: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          stage?: number
-          student_id: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          stage?: number
-          student_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "student_stages_student_id_fkey"
-            columns: ["student_id"]
-            isOneToOne: true
-            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]

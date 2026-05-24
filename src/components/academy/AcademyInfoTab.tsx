@@ -21,7 +21,7 @@ export default function AcademyInfoTab({ course, onSaved }: Props) {
   const [type, setType] = useState(course.type);
   const [price, setPrice] = useState(course.price?.toString() || "0");
   const [thumbnailUrl, setThumbnailUrl] = useState(course.thumbnail_url || "");
-  const [externalId, setExternalId] = useState(course.external_id || "");
+  
   const [contentType, setContentType] = useState(course.content_type || "video");
   const [pdfUrl, setPdfUrl] = useState(course.pdf_url || "");
   const [htmlContent, setHtmlContent] = useState(course.html_content || "");
@@ -51,7 +51,7 @@ export default function AcademyInfoTab({ course, onSaved }: Props) {
     setSaving(true);
     const { error } = await supabase.from("courses").update({
       title: title.trim(), description, type, price: parseFloat(price) || 0,
-      thumbnail_url: thumbnailUrl || null, external_id: externalId.trim() || null,
+      thumbnail_url: thumbnailUrl || null,
       content_type: contentType,
       pdf_url: contentType === "pdf" ? pdfUrl || null : null,
       html_content: contentType === "html" ? htmlContent || null : null,
@@ -139,10 +139,6 @@ export default function AcademyInfoTab({ course, onSaved }: Props) {
         </div>
       )}
 
-      <div>
-        <label className="text-sm mb-1.5 block" style={{ color: "#b8b8b8" }}>מזהה ייחודי (אופציונלי)</label>
-        <Input value={externalId} onChange={(e) => setExternalId(e.target.value)} placeholder="למשל: COURSE-001" dir="ltr" className="font-outfit" style={inputStyle} />
-      </div>
       <div className="flex gap-3">
         <div className="flex-1">
           <label className="text-sm mb-1.5 block" style={{ color: "#b8b8b8" }}>סוג קורס</label>

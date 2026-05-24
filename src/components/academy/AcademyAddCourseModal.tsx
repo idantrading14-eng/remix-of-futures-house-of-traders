@@ -10,7 +10,7 @@ import ThumbnailUpload from "@/components/courses/ThumbnailUpload";
 type Props = {
   onClose: () => void;
   onSaved: () => void;
-  course?: { id: string; title: string; description: string; type: string; price: number; thumbnail_url: string | null; external_id: string | null; content_type?: string; pdf_url?: string | null; html_content?: string | null };
+  course?: { id: string; title: string; description: string; type: string; price: number; thumbnail_url: string | null; content_type?: string; pdf_url?: string | null; html_content?: string | null };
 };
 
 const CONTENT_TYPES = [
@@ -25,7 +25,7 @@ export default function AcademyAddCourseModal({ onClose, onSaved, course }: Prop
   const [type, setType] = useState(course?.type || "basic");
   const [price, setPrice] = useState(course?.price?.toString() || "0");
   const [thumbnailUrl, setThumbnailUrl] = useState(course?.thumbnail_url || "");
-  const [externalId, setExternalId] = useState(course?.external_id || "");
+  
   const [contentType, setContentType] = useState(course?.content_type || "video");
   const [pdfUrl, setPdfUrl] = useState(course?.pdf_url || "");
   const [htmlContent, setHtmlContent] = useState(course?.html_content || "");
@@ -55,7 +55,7 @@ export default function AcademyAddCourseModal({ onClose, onSaved, course }: Prop
     setSaving(true);
     const payload: any = {
       title: title.trim(), description, type, price: parseFloat(price) || 0,
-      thumbnail_url: thumbnailUrl || null, external_id: externalId.trim() || null,
+      thumbnail_url: thumbnailUrl || null,
       content_type: contentType,
       pdf_url: contentType === "pdf" ? pdfUrl || null : null,
       html_content: contentType === "html" ? htmlContent || null : null,
@@ -162,10 +162,6 @@ export default function AcademyAddCourseModal({ onClose, onSaved, course }: Prop
             </div>
           )}
 
-          <div>
-            <label className="text-sm mb-1.5 block" style={{ color: "#b8b8b8" }}>מזהה ייחודי (אופציונלי)</label>
-            <Input value={externalId} onChange={(e) => setExternalId(e.target.value)} placeholder="למשל: COURSE-001" dir="ltr" className="font-outfit" style={inputStyle} />
-          </div>
           <div className="flex gap-3">
             <div className="flex-1">
               <label className="text-sm mb-1.5 block" style={{ color: "#b8b8b8" }}>סוג</label>
