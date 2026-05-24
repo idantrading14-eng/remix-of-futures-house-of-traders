@@ -1,9 +1,7 @@
 import { useState } from "react";
 import {
-  LayoutDashboard,
   BookOpen,
   Bookmark,
-  MessageSquare,
   Settings,
   LogOut,
   Menu,
@@ -18,14 +16,12 @@ type NavItem = {
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { key: "dashboard", label: "דשבורד", icon: <LayoutDashboard className="w-5 h-5" />, section: "כללי" },
   { key: "courses", label: "הקורסים שלי", icon: <BookOpen className="w-5 h-5" />, section: "תוכן" },
   { key: "bookmarks", label: "סימניות", icon: <Bookmark className="w-5 h-5" />, section: "תוכן" },
-  { key: "chat", label: "צ'אט עם המנטור", icon: <MessageSquare className="w-5 h-5" />, section: "תוכן" },
   { key: "settings", label: "הגדרות", icon: <Settings className="w-5 h-5" />, section: "מערכת" },
 ];
 
-const SECTIONS = ["כללי", "תוכן", "מערכת"];
+const SECTIONS = ["תוכן", "מערכת"];
 
 interface Props {
   activeView: string;

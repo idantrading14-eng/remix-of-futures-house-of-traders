@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { BookOpen, Play, CheckCircle2, Lock, FileText, Code } from "lucide-react";
 import AcademyLessonViewer from "@/components/academy/AcademyLessonViewer";
 
-type Course = { id: string; title: string; description: string | null; thumbnail_url: string | null; type: string; external_id: string | null; content_type?: string; pdf_url?: string | null; html_content?: string | null };
+type Course = { id: string; title: string; description: string | null; thumbnail_url: string | null; type: string; content_type?: string; pdf_url?: string | null; html_content?: string | null };
 type Module = { id: string; title: string; sort_order: number; notes: string | null };
 type Lesson = {
   id: string; title: string; sort_order: number; module_id: string; duration_minutes: number | null;
@@ -118,19 +118,11 @@ export default function StudentCoursesView({ userId }: { userId: string }) {
   useEffect(() => {
     const fetchData = async () => {
       const { data: coursesData } = await supabase.from("courses").select("*");
-      const courses = (coursesData || []) as Course[];
+      const courses = (coursesData || []) as unknown as Course[];
       setAllCourses(courses);
 
-      const [{ data: details }, { data: enrollments }] = await Promise.all([
-        supabase.from("client_details").select("product_ids").eq("student_id", userId).single(),
-        supabase.from("enrollments").select("course_id").eq("client_id", userId),
-      ]);
-      const productIds: string[] = Array.isArray((details as any)?.product_ids) ? (details as any).product_ids.map(String) : [];
-
+      const { data: enrollments } = await supabase.from("enrollments").select("course_id").eq("client_id", userId);
       const unlocked = new Set<string>();
-      for (const course of courses) {
-        if (course.external_id && productIds.includes(course.external_id)) unlocked.add(course.id);
-      }
       for (const enrollment of (enrollments || [])) unlocked.add(enrollment.course_id);
       setUnlockedIds(unlocked);
       await fetchProgress(courses, unlocked);

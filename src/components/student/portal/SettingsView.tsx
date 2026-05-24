@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import {
-  User, Camera, Phone, Shield, Lock, Trash2,
+  User, Camera, Shield, Lock, Trash2,
   Eye, EyeOff
 } from "lucide-react";
 import {
@@ -34,7 +34,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 export default function SettingsView() {
   /* ── profile state ── */
   const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [savingProfile, setSavingProfile] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
@@ -60,13 +59,6 @@ export default function SettingsView() {
         .eq("id", user.id)
         .single();
       if (profile) setFullName(profile.display_name);
-
-      const { data: details } = await supabase
-        .from("client_details")
-        .select("phone")
-        .eq("student_id", user.id)
-        .single();
-      if (details?.phone) setPhone(details.phone);
     })();
   }, []);
 
@@ -81,14 +73,8 @@ export default function SettingsView() {
       .update({ display_name: fullName })
       .eq("id", user.id);
 
-    if (!error) {
-      await supabase
-        .from("client_details")
-        .upsert({ student_id: user.id, phone, status: "active" }, { onConflict: "student_id" });
-      toast.success("הפרופיל עודכן בהצלחה");
-    } else {
-      toast.error("שגיאה בעדכון הפרופיל");
-    }
+    if (!error) toast.success("הפרופיל עודכן בהצלחה");
+    else toast.error("שגיאה בעדכון הפרופיל");
     setSavingProfile(false);
   };
 

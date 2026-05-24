@@ -4,7 +4,6 @@ import { ArrowRight, BookOpen, Users, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import AcademyContentTab from "./AcademyContentTab";
 import AcademyInfoTab from "./AcademyInfoTab";
-import AcademyStudentsTab from "./AcademyStudentsTab";
 import AcademySettingsTab from "./AcademySettingsTab";
 
 type Props = { courseId: string; onBack: () => void };
@@ -18,7 +17,6 @@ const TYPE_LABELS: Record<string, { label: string; bg: string; text: string }> =
 const ALL_TABS = [
   { key: "content", label: "תוכן" },
   { key: "info", label: "מידע" },
-  { key: "students", label: "תלמידים" },
   { key: "settings", label: "הגדרות" },
 ];
 
@@ -119,7 +117,6 @@ export default function AcademyCourseDetail({ courseId, onBack }: Props) {
       <div className="p-4 sm:p-6">
         {activeTab === "content" && <AcademyContentTab courseId={courseId} />}
         {activeTab === "info" && <AcademyInfoTab course={course} onSaved={fetchCourse} />}
-        {activeTab === "students" && <AcademyStudentsTab courseId={courseId} />}
         {activeTab === "settings" && <AcademySettingsTab course={course} onSaved={fetchCourse} onDeleted={onBack} />}
       </div>
     </div>
