@@ -175,18 +175,6 @@ export default function SettingsView() {
           placeholder="הכנס שם מלא"
         />
 
-        {/* phone */}
-        <label className="block text-xs text-gray-400 mb-1 mt-4">
-          <Phone size={12} className="inline ml-1" /> מספר טלפון
-        </label>
-        <input
-          className={INPUT_CLS}
-          style={{ background: "#1a1a1a", borderColor: "#333" }}
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          placeholder="050-0000000"
-          dir="ltr"
-        />
 
         <button
           className={SAVE_BTN + " mt-5"}
