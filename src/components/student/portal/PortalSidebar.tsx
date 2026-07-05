@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   BookOpen,
   Bookmark,
+  ClipboardCheck,
   Settings,
   LogOut,
   Menu,
@@ -17,6 +18,7 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
   { key: "courses", label: "הקורסים שלי", icon: <BookOpen className="w-5 h-5" />, section: "תוכן" },
+  { key: "tests", label: "מבחנים", icon: <ClipboardCheck className="w-5 h-5" />, section: "תוכן" },
   { key: "bookmarks", label: "סימניות", icon: <Bookmark className="w-5 h-5" />, section: "תוכן" },
   { key: "settings", label: "הגדרות", icon: <Settings className="w-5 h-5" />, section: "מערכת" },
 ];
