@@ -139,6 +139,7 @@ export default function AppShell() {
               : <CoursesListView onOpen={setSelectedCourseId} />
           )}
           {activeView === "students" && <StudentsListView />}
+          {activeView === "tests" && <MentorTestsView />}
           {activeView === "settings" && (
             <div className="h-full flex items-center justify-center">
               <div className="text-center space-y-4">
