@@ -1,4 +1,5 @@
 import QuestionShell from "./QuestionShell";
+import TestImage from "../TestImage";
 import type { ImageChoiceQ, AnswerValue } from "../types";
 
 interface Props {
@@ -26,7 +27,7 @@ export default function ImageChoiceQuestion({ question, value, onChange, disable
               }}
             >
               {opt.image && (
-                <img src={opt.image} alt={opt.label || ""} className="w-full h-40 object-cover" />
+                <TestImage src={opt.image} alt={opt.label || ""} className="w-full h-40 object-cover" />
               )}
               {opt.label && (
                 <div className="p-3 text-sm" style={{ color: selected ? "#d4a017" : "#ddd" }}>
