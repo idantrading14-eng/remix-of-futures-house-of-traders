@@ -7,6 +7,7 @@ import PortalTopBar from "@/components/student/portal/PortalTopBar";
 import BookmarksView from "@/components/student/portal/BookmarksView";
 import SettingsView from "@/components/student/portal/SettingsView";
 import StudentCoursesView from "@/components/student/StudentCoursesView";
+import TestsView from "@/components/student/tests/TestsView";
 
 export default function FuturesPortal() {
   const navigate = useNavigate();
@@ -44,6 +45,8 @@ export default function FuturesPortal() {
     switch (view) {
       case "courses":
         return <div className="flex-1 overflow-auto"><StudentCoursesView userId={userId!} /></div>;
+      case "tests":
+        return <TestsView />;
       case "bookmarks":
         return <BookmarksView userId={userId!} onOpenLesson={() => setView("courses")} />;
       case "settings":
