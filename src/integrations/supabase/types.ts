@@ -373,6 +373,33 @@ export type Database = {
           },
         ]
       }
+      test_levels: {
+        Row: {
+          created_at: string
+          id: string
+          questions: Json
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          questions?: Json
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          questions?: Json
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

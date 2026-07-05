@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Pen, Eraser, Trash2, Eye } from "lucide-react";
 import QuestionShell from "./QuestionShell";
+import TestImage from "../TestImage";
 import type { DrawingQ, AnswerValue } from "../types";
 
 interface Props {
@@ -149,7 +150,7 @@ export default function DrawingQuestion({ question, value, onChange, disabled }:
           <div className="space-y-3">
             <div>
               <p className="text-xs mb-2" style={{ color: "#888" }}>התשובה הנכונה:</p>
-              <img
+              <TestImage
                 src={question.correctAnswerImage}
                 alt="correct"
                 className="w-full max-h-80 object-contain rounded-xl"

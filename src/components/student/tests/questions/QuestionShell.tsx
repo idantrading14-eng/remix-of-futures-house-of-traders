@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Lightbulb } from "lucide-react";
 import type { Question } from "../types";
+import TestImage from "../TestImage";
 
 export default function QuestionShell({ question, children }: { question: Question; children: React.ReactNode }) {
   const [showHint, setShowHint] = useState(false);
@@ -11,7 +12,7 @@ export default function QuestionShell({ question, children }: { question: Questi
           {question.prompt}
         </h2>
         {question.image && (
-          <img
+          <TestImage
             src={question.image}
             alt=""
             className="mt-4 rounded-xl max-h-64 object-contain"

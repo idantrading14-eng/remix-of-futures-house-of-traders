@@ -5,18 +5,20 @@ import { logout } from "@/lib/auth";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   BookOpen, Users, Settings, LogOut, ChevronRight, ChevronLeft,
-  GraduationCap, Plus, Search, Shield,
+  GraduationCap, Plus, Search, Shield, ClipboardCheck,
 } from "lucide-react";
 import { toast } from "sonner";
 import AcademyCourseDetail from "@/components/academy/AcademyCourseDetail";
 import AcademyAddCourseModal from "@/components/academy/AcademyAddCourseModal";
 import AccessManagementModal from "@/components/academy/AccessManagementModal";
+import MentorTestsView from "@/components/academy/tests/MentorTestsView";
 
-type View = "courses" | "students" | "settings";
+type View = "courses" | "students" | "tests" | "settings";
 
 const navItems: { icon: React.ElementType; label: string; view: View }[] = [
   { icon: BookOpen, label: "קורסים", view: "courses" },
   { icon: Users, label: "תלמידים", view: "students" },
+  { icon: ClipboardCheck, label: "מבחנים", view: "tests" },
   { icon: Settings, label: "הגדרות", view: "settings" },
 ];
 
@@ -137,6 +139,7 @@ export default function AppShell() {
               : <CoursesListView onOpen={setSelectedCourseId} />
           )}
           {activeView === "students" && <StudentsListView />}
+          {activeView === "tests" && <MentorTestsView />}
           {activeView === "settings" && (
             <div className="h-full flex items-center justify-center">
               <div className="text-center space-y-4">

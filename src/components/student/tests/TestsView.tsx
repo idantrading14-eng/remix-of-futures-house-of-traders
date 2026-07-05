@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { testLevels } from "@/data/testsData";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { testLevels as seedLevels } from "@/data/testsData";
 import LevelsList from "./LevelsList";
 import TestRunner from "./TestRunner";
 import TestResults from "./TestResults";
-import type { AnswerValue } from "./types";
+import type { AnswerValue, Level, Question } from "./types";
 
 type Stage =
   | { kind: "list" }
@@ -12,12 +13,44 @@ type Stage =
 
 export default function TestsView() {
   const [stage, setStage] = useState<Stage>({ kind: "list" });
+  const [levels, setLevels] = useState<Level[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  if (stage.kind === "list") {
-    return <LevelsList levels={testLevels} onSelect={(id) => setStage({ kind: "running", levelId: id })} />;
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const { data } = await supabase
+        .from("test_levels")
+        .select("id, title, questions")
+        .order("sort_order", { ascending: true });
+      if (data && data.length > 0) {
+        setLevels(data.map(r => ({
+          id: r.id as string,
+          title: r.title as string,
+          questions: (r.questions as unknown as Question[]) || [],
+        })));
+      } else {
+        setLevels(seedLevels);
+      }
+      setLoading(false);
+    })();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="p-10 text-center" style={{ color: "#888" }}>טוען מבחנים...</div>
+    );
   }
 
-  const level = testLevels.find(l => l.id === stage.levelId)!;
+  if (stage.kind === "list") {
+    return <LevelsList levels={levels} onSelect={(id) => setStage({ kind: "running", levelId: id })} />;
+  }
+
+  const level = levels.find(l => l.id === stage.levelId)!;
+  if (!level) {
+    setStage({ kind: "list" });
+    return null;
+  }
 
   if (stage.kind === "running") {
     return (
